@@ -1,0 +1,59 @@
+<html>
+<script src='/socket.io/lib/socket.io.js'></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/analytics.js" type="text/javascript"></script>
+<script type="text/javascript">
+var temp='';
+
+  var server =io.connect('http://localhost:8080');
+  //alert("HELLO NIRWAN ");
+  server.on('connect',function(data){
+     nickname=prompt('What is your name ?');
+     server.emit('join',nickname);
+  });
+  server.on('messages',function(data)
+  {
+     //alert(data.hello);
+     $('.inner').append('<br>'+data.hello);
+    // server.emit('messages',{ hello: 'world' });
+  });
+  server.on('textchanged',function(data)
+  {
+     //alert(data.hello);
+     $('#input').val(data.hello);
+  });
+  $(document).ready(function () 
+  {
+  $('#chatform').submit(function(e)
+  {
+     var message =$('#chat_input').val();
+     $('#chat_input').val("");
+     server.emit('messages',{ hello:message });
+	 $('.inner').append('<br>Me : '+message);
+  });
+   //alert(' ready ');
+	   var st;
+	   $('#input').on('keypress',function(){
+	   // alert(' pressed ');
+	   	if(st){
+		  clearTimeout(st);
+		}	
+        st=setTimeout(function(){
+		var text=$('#input').val();
+		server.emit('textchanged',{ hello:text });
+		},1e1);		 
+	    });
+});
+
+</script>
+<body>
+ <form id='chatform' onsubmit="return false">
+    <input type='text' id='chat_input' value="" >
+    <input type='submit'  value='Send' id='but' ><br>
+ </form>
+ <br>
+ <div class='inner'></div>
+ <textarea rows=20 cols=20 id='input'>
+ </textarea>
+</body>
+</html> 
