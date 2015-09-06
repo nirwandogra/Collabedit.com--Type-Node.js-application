@@ -1,7 +1,9 @@
 
 
 # firstapp
-
+Built using nodejs socket.io module .
+Applcation in which two or more people can chat real time and share screen
+just like http://collabedit.com/
 
 
 ## Usage
