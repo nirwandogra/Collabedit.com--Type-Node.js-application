@@ -5,6 +5,7 @@ var socket = require('socket.io');
 var io = socket.listen(http, {
   log: false
 });
+app.set('port', process.env.PORT || 8080);
 var flag = 1;
 app.use(express.static('public'));
 app.get('/', function(req, res) {
@@ -38,6 +39,9 @@ io.sockets.on('connection', function(client) {
   });
   //client.broadcast.emit('messages',data);
 });
-http.listen(8080, function() {
-  console.log('listening on *:8080');
-});
+// http.listen(8080, function() {
+//   console.log('listening on *:8080');
+// });
+http.listen(app.get('port'), function() {
+    console.log("Server listening on port " + app.get('port') );
+  });
