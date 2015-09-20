@@ -1,11 +1,11 @@
 <html>
 <script src='/socket.io/lib/socket.io.js'></script>
+<script src='js/conf.js'></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="js/analytics.js" type="text/javascript"></script>
 <script type="text/javascript">
 var temp='';
-
-  var server =io.connect('http://localhost:8080');
+  var server =io.connect(host);
   //alert("HELLO NIRWAN ");
   server.on('connect',function(data){
      nickname=prompt('What is your name ?');

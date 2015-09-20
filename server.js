@@ -9,7 +9,6 @@ app.set('port', process.env.PORT || 8080);
 var flag = 1;
 app.use(express.static('public'));
 app.get('/', function(req, res) {
-  //console.log('received the get ');
   var body = 'nirwan';
   var x = body.lengttgfgdfh;
   console.log(x);
